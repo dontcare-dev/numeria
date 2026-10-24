@@ -15,12 +15,15 @@
 
 :root {
   --bg: #000000;
-  --surface: #000000;
-  --border: #333333;
+  --surface: #111111;
+  --border: #ffffff;
   --text: #ffffff;
   --text-muted: #888888;
   --accent: #ffffff;
   --accent-text: #000000;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --warning: #eab308;
 }
 
 body { 
@@ -35,94 +38,119 @@ body {
 
 button { 
   cursor: pointer; 
-  border: 1px solid var(--border); 
+  border: 3px solid var(--border); 
   background: var(--surface); 
   color: var(--text); 
-  transition: all 0.1s ease;
+  transition: all 0.1s;
+  box-shadow: 4px 4px 0 var(--border);
 }
 
-button:active { transform: scale(0.98); }
-input, select { outline: none; border: 1px solid var(--border); background: var(--bg); color: var(--text); }
+button:active:not(:disabled) { 
+  transform: translate(4px, 4px); 
+  box-shadow: 0 0 0 var(--border); 
+}
+
+button:disabled {
+  opacity: 0.5;
+  box-shadow: none;
+  transform: translate(4px, 4px);
+}
+
+input, select { 
+  outline: none; 
+  border: 3px solid var(--border); 
+  background: var(--bg); 
+  color: var(--text); 
+  box-shadow: 4px 4px 0 var(--border);
+}
 
 /* LOGIN SCREEN */
 #login-screen { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 24px; background: var(--bg); }
 #login-screen.hidden { display: none; }
-.login-box { width: 100%; max-width: 400px; padding: 32px; border: 1px solid var(--border); border-radius: 4px; text-align: center; }
-.login-logo { width: 50px; height: 50px; border-radius: 4px; background: var(--accent); display: grid; place-items: center; margin: 0 auto 24px; color: var(--accent-text); font-size: 24px; }
-.login-title { font-size: 36px; margin: 0 0 12px; letter-spacing: 1px; }
+.login-box { width: 100%; max-width: 400px; padding: 32px; border: 3px solid var(--border); text-align: center; background: var(--surface); box-shadow: 8px 8px 0 var(--border); }
+.login-logo { width: 60px; height: 60px; background: var(--accent); display: grid; place-items: center; margin: 0 auto 24px; color: var(--accent-text); font-size: 32px; border: 3px solid var(--border); }
+.login-title { font-size: 40px; margin: 0 0 12px; }
 .login-sub { color: var(--text-muted); font-size: 18px; margin: 0 0 32px; }
-.login-input { width: 100%; padding: 16px; border-radius: 4px; font-size: 18px; margin-bottom: 16px; text-align: center; }
-.login-btn { width: 100%; padding: 16px; border-radius: 4px; background: var(--accent); color: var(--accent-text); border: none; font-size: 20px; }
-.login-btn:hover { opacity: 0.8; }
+.login-input { width: 100%; padding: 16px; font-size: 20px; margin-bottom: 24px; text-align: center; }
+.login-btn { width: 100%; padding: 16px; background: var(--accent); color: var(--accent-text); font-size: 24px; }
 
 /* APP LAYOUT */
 #app { display: none; flex-direction: column; flex: 1; }
 #app.active { display: flex; }
 
-.topbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; border-bottom: 1px solid var(--border); }
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; border-bottom: 3px solid var(--border); background: var(--bg); position: sticky; top: 0; z-index: 10; }
 .brand { display: flex; align-items: center; gap: 12px; font-size: 24px; }
-.logo { height: 32px; width: 32px; border-radius: 4px; background: var(--accent); display: grid; place-items: center; color: var(--accent-text); font-size: 16px; }
+.logo { height: 36px; width: 36px; background: var(--accent); display: grid; place-items: center; color: var(--accent-text); font-size: 18px; border: 3px solid var(--border); }
 .top-actions { display: flex; align-items: center; gap: 12px; }
-.pill { padding: 6px 12px; border-radius: 4px; font-size: 16px; border: 1px solid var(--border); }
-.icon-btn { width: 36px; height: 36px; border-radius: 4px; display: grid; place-items: center; font-size: 16px; }
+.pill { padding: 8px 12px; font-size: 18px; border: 2px solid var(--border); background: var(--surface); }
+.icon-btn { width: 40px; height: 40px; display: grid; place-items: center; font-size: 18px; }
 
-.main { flex: 1; padding: 32px 24px; max-width: 800px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; }
+.xp-container { padding: 0 24px 16px; background: var(--bg); border-bottom: 3px solid var(--border); }
+.xp-header { display: flex; justify-content: space-between; font-size: 16px; margin-bottom: 8px; color: var(--text-muted); }
+.xp-bar { width: 100%; height: 16px; border: 3px solid var(--border); background: var(--surface); overflow: hidden; }
+.xp-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.3s ease; }
+
+.main { flex: 1; padding: 24px; max-width: 800px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; }
 .page { display: none; flex: 1; }
 .page.active { display: block; }
 
-.heading-row { margin-bottom: 32px; }
-.heading-row h1 { font-size: 32px; margin: 0 0 8px; font-weight: normal; }
+.heading-row { margin-bottom: 24px; }
+.heading-row h1 { font-size: 32px; margin: 0 0 8px; }
 .heading-row p { margin: 0; color: var(--text-muted); font-size: 18px; }
 
-.panel { border: 1px solid var(--border); padding: 24px; border-radius: 4px; margin-bottom: 24px; }
-.btn { border-radius: 4px; padding: 14px 20px; font-size: 18px; display: flex; justify-content: center; align-items: center; gap: 8px; }
-.btn.primary { background: var(--accent); color: var(--accent-text); border: none; }
-.btn.primary:hover { opacity: 0.8; }
-.btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.panel { border: 3px solid var(--border); padding: 24px; margin-bottom: 24px; background: var(--surface); box-shadow: 6px 6px 0 var(--border); }
+.btn { padding: 16px 20px; font-size: 20px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+.btn.primary { background: var(--accent); color: var(--accent-text); }
 
 .form-group { margin-bottom: 24px; }
-.form-group label { display: block; font-size: 18px; margin-bottom: 8px; color: var(--text-muted); }
-.form-control { width: 100%; padding: 16px; border-radius: 4px; font-size: 18px; }
+.form-group label { display: block; font-size: 20px; margin-bottom: 8px; color: var(--text-muted); }
+.form-control { width: 100%; padding: 16px; font-size: 18px; }
 
 /* QUIZ UI */
-.question-header { display: flex; justify-content: space-between; font-size: 16px; color: var(--text-muted); margin-bottom: 24px; }
-.math-expr { font-size: 28px; line-height: 1.5; margin: 24px 0 32px; }
+.question-header { display: flex; justify-content: space-between; font-size: 18px; color: var(--text-muted); margin-bottom: 24px; }
+.combo-text { color: var(--warning); font-size: 24px; margin-bottom: 16px; display: none; }
+.math-expr { font-size: 28px; line-height: 1.6; margin: 24px 0 32px; }
 .answers { display: grid; grid-template-columns: 1fr; gap: 16px; }
-.answer { padding: 20px; border-radius: 4px; font-size: 20px; text-align: left; display: flex; align-items: center; gap: 16px; }
+.answer { padding: 20px; font-size: 20px; text-align: left; display: flex; align-items: center; gap: 16px; }
 .answer::before { content: 'A'; font-size: 16px; color: var(--text-muted); }
 .answer:nth-child(2)::before { content: 'B'; } .answer:nth-child(3)::before { content: 'C'; } .answer:nth-child(4)::before { content: 'D'; }
-.answer:hover { border-color: var(--text-muted); }
-.answer.correct { border-color: #fff; background: #111; }
-.answer.wrong { border-color: #fff; border-style: dashed; opacity: 0.5; }
+.answer.correct { background: var(--success); color: var(--bg); border-color: var(--success); box-shadow: 4px 4px 0 var(--success); }
+.answer.correct::before { color: var(--bg); }
+.answer.wrong { background: var(--danger); color: var(--bg); border-color: var(--danger); box-shadow: 4px 4px 0 var(--danger); }
+.answer.wrong::before { color: var(--bg); }
+.answer.hidden-5050 { opacity: 0.2; pointer-events: none; }
 
-.feedback { margin-top: 24px; font-size: 18px; line-height: 1.6; color: var(--text-muted); padding: 16px; border: 1px solid var(--border); border-radius: 4px; display: none; }
-.feedback strong { color: var(--text); font-weight: normal; }
-.hint-box { border: 1px solid var(--border); padding: 16px; border-radius: 4px; font-size: 18px; margin-top: 16px; display: none; }
+.feedback { margin-top: 24px; font-size: 20px; line-height: 1.6; padding: 16px; border: 3px solid var(--border); background: var(--bg); display: none; }
+.hint-box { border: 3px solid var(--warning); padding: 16px; font-size: 18px; margin-top: 16px; display: none; color: var(--warning); background: var(--surface); }
 
 .input-group { display: flex; gap: 12px; margin-bottom: 24px; }
-.input-answer { flex: 1; padding: 16px; border-radius: 4px; font-size: 20px; }
-.mic-btn { width: 60px; border-radius: 4px; display: grid; place-items: center; font-size: 20px; }
+.input-answer { flex: 1; padding: 16px; font-size: 20px; }
+.mic-btn { width: 64px; display: grid; place-items: center; font-size: 24px; }
 
-.loader { width: 24px; height: 24px; border: 2px solid var(--border); border-top-color: var(--text); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 16px; }
+.loader { width: 30px; height: 30px; border: 4px solid var(--border); border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 16px; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* SHOP & STATS */
-.shop-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-.shop-item { padding: 24px; border-radius: 4px; border: 1px solid var(--border); display: flex; flex-direction: column; }
-.shop-item h3 { margin: 0 0 8px; font-size: 22px; font-weight: normal; }
+.shop-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+.shop-item { padding: 24px; border: 3px solid var(--border); display: flex; flex-direction: column; background: var(--surface); box-shadow: 6px 6px 0 var(--border); }
+.shop-item h3 { margin: 0 0 8px; font-size: 24px; }
 .shop-item p { color: var(--text-muted); font-size: 18px; margin: 0 0 24px; }
 .shop-bottom { display: flex; justify-content: space-between; align-items: center; }
-.shop-price { font-size: 20px; }
+.shop-price { font-size: 24px; color: var(--warning); }
 
 .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
-.stat-card { padding: 24px; border-radius: 4px; border: 1px solid var(--border); display: flex; flex-direction: column; }
-.stat-card h3 { margin: 0 0 8px; color: var(--text-muted); font-size: 16px; font-weight: normal; }
-.stat-card p { font-size: 32px; margin: 0; }
+.stat-card { padding: 24px; border: 3px solid var(--border); background: var(--surface); box-shadow: 4px 4px 0 var(--border); }
+.stat-card h3 { margin: 0 0 8px; color: var(--text-muted); font-size: 18px; }
+.stat-card p { font-size: 36px; margin: 0; }
 
 /* BOTTOM NAV */
-.bottom-nav { display: flex; justify-content: space-around; align-items: center; padding: 16px 10px calc(16px + env(safe-area-inset-bottom)); border-top: 1px solid var(--border); position: sticky; bottom: 0; background: var(--bg); z-index: 10; }
-.nav-btn { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-muted); font-size: 14px; background: none; border: none; }
+.bottom-nav { display: flex; justify-content: space-around; align-items: center; padding: 16px 10px calc(16px + env(safe-area-inset-bottom)); border-top: 3px solid var(--border); position: sticky; bottom: 0; background: var(--bg); z-index: 10; }
+.nav-btn { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-muted); font-size: 16px; background: none; border: none; box-shadow: none; }
+.nav-btn:active { transform: scale(0.9); box-shadow: none; }
 .nav-btn.active { color: var(--text); }
+
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+.shake { animation: shake 0.3s ease-in-out; }
 
 @media(min-width: 600px) {
   .answers { grid-template-columns: 1fr 1fr; }
@@ -149,17 +177,24 @@ input, select { outline: none; border: 1px solid var(--border); background: var(
   <header class="topbar">
     <div class="brand"><div class="logo">N</div>Numeria</div>
     <div class="top-actions">
-      <div class="pill">XP: <span id="xp-pill">0</span></div>
-      <div class="pill">Coins: <span id="coin-pill">0</span></div>
+      <div class="pill">🪙 <span id="coin-pill">0</span></div>
       <button class="icon-btn" id="logout-btn" title="Logout">✕</button>
     </div>
   </header>
+
+  <div class="xp-container">
+    <div class="xp-header">
+      <span>LEVEL <span id="level-text">1</span></span>
+      <span id="xp-text">0 / 100 XP</span>
+    </div>
+    <div class="xp-bar"><div class="xp-fill" id="xp-fill"></div></div>
+  </div>
 
   <main class="main">
     <section class="page active" id="page-home">
       <div class="heading-row">
         <h1>Welcome, <span id="welcome-name">Explorer</span></h1>
-        <p>Choose your topic.</p>
+        <p>Choose your battlefield.</p>
       </div>
       <div class="panel">
         <div class="form-group">
@@ -177,9 +212,9 @@ input, select { outline: none; border: 1px solid var(--border); background: var(
         </div>
         <div class="form-group">
           <label>Topic</label>
-          <input type="text" id="topic-input" class="form-control" placeholder="e.g. Fractions">
+          <input type="text" id="topic-input" class="form-control" placeholder="e.g. Tricky Fractions">
         </div>
-        <button class="btn primary" style="width: 100%;" id="start-session-btn">Start Learning</button>
+        <button class="btn primary" style="width: 100%;" id="start-session-btn">Start Lesson</button>
       </div>
     </section>
 
@@ -195,7 +230,7 @@ input, select { outline: none; border: 1px solid var(--border); background: var(
       <div class="panel">
         <div id="loading-state" style="display: none; text-align: center; padding: 40px 0;">
           <div class="loader"></div>
-          <p style="color: var(--text-muted); font-size: 18px;">Consulting AI...</p>
+          <p style="color: var(--text-muted); font-size: 20px;">Consulting AI...</p>
         </div>
         
         <div id="question-state" style="display: none;">
@@ -203,13 +238,15 @@ input, select { outline: none; border: 1px solid var(--border); background: var(
             <span id="question-counter">QUESTION 1</span>
             <span id="question-type">MCQ</span>
           </div>
+          <div id="combo-text" class="combo-text">🔥 STREAK: <span id="streak-count">0</span></div>
           <div id="q-content"></div>
           <div id="feedback" class="feedback"></div>
           <div id="hint-box" class="hint-box"></div>
           
-          <div style="display:flex; gap: 16px; margin-top:32px;">
-            <button class="btn" style="flex: 1;" id="hint-btn">Hint</button>
-            <button class="btn primary" style="flex: 2;" id="next-btn" disabled>Check</button>
+          <div style="display:flex; gap: 16px; margin-top:32px; flex-wrap: wrap;">
+            <button class="btn" style="flex: 1;" id="hint-btn">Hint (-5 XP)</button>
+            <button class="btn" style="flex: 1; display: none;" id="fifty-btn">50/50</button>
+            <button class="btn primary" style="flex: 1 1 100%;" id="next-btn" disabled>Check</button>
           </div>
         </div>
       </div>
@@ -219,18 +256,22 @@ input, select { outline: none; border: 1px solid var(--border); background: var(
       <div class="heading-row" style="display: flex; justify-content: space-between; align-items: center;">
         <div>
           <h1>Shop</h1>
-          <p>Power-ups</p>
+          <p>Buy power-ups.</p>
         </div>
-        <div class="pill">Coins: <span id="shop-coins">0</span></div>
+        <div class="pill">🪙 <span id="shop-coins">0</span></div>
       </div>
       <div class="shop-grid">
         <div class="shop-item">
           <h3>Hint Token</h3><p>Reveal a hint without losing XP.</p>
-          <div class="shop-bottom"><div class="shop-price">50</div><button class="btn" onclick="buyItem('hint', 50)">Buy</button></div>
+          <div class="shop-bottom"><div class="shop-price">50 🪙</div><button class="btn" onclick="buyItem('hint', 50)">Buy</button></div>
+        </div>
+        <div class="shop-item">
+          <h3>50/50</h3><p>Eliminates two wrong answers.</p>
+          <div class="shop-bottom"><div class="shop-price">75 🪙</div><button class="btn" onclick="buyItem('fifty', 75)">Buy</button></div>
         </div>
         <div class="shop-item">
           <h3>Double XP</h3><p>Earn 20 XP instead of 10.</p>
-          <div class="shop-bottom"><div class="shop-price">150</div><button class="btn" onclick="buyItem('xp', 150)">Buy</button></div>
+          <div class="shop-bottom"><div class="shop-price">150 🪙</div><button class="btn" onclick="buyItem('xp', 150)">Buy</button></div>
         </div>
       </div>
     </section>
@@ -247,7 +288,7 @@ input, select { outline: none; border: 1px solid var(--border); background: var(
         <div class="stat-card"><h3>XP</h3><p id="stat-xp-earned">0</p></div>
       </div>
       <div class="panel" style="text-align: center;">
-        <h2 style="font-size: 24px; margin: 0 0 24px; font-weight: normal;">Export</h2>
+        <h2 style="font-size: 24px; margin: 0 0 24px;">Export Results</h2>
         <div style="display: flex; flex-direction: column; gap: 16px;">
           <button class="btn primary" id="download-exam-btn">Download Exam</button>
           <button class="btn" id="download-answers-btn">Download Answers</button>
@@ -270,7 +311,7 @@ const { jsPDF } = window.jspdf;
 
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
 
-let state = { name: 'Explorer', xp: 0, coins: 0, hintTokens: 0, doubleXp: false };
+let state = { name: 'Explorer', xp: 0, coins: 0, hintTokens: 0, fiftyTokens: 0, doubleXp: false };
 let sessionData = { questions: [], grade: 5, topic: 'General', correctCount: 0, totalCount: 0, streak: 0 };
 
 $('#login-btn').addEventListener('click', () => {
@@ -292,7 +333,13 @@ $('#logout-btn').addEventListener('click', () => location.reload());
 
 function saveProfile() { localStorage.setItem(`numeria_${state.name}`, JSON.stringify(state)); }
 function updateUI() {
-  $('#xp-pill').textContent = state.xp;
+  const level = Math.floor(state.xp / 100) + 1;
+  const xpInLevel = state.xp % 100;
+  
+  $('#level-text').textContent = level;
+  $('#xp-text').textContent = `${xpInLevel} / 100 XP`;
+  $('#xp-fill').style.width = `${xpInLevel}%`;
+  
   $('#coin-pill').textContent = state.coins;
   $('#shop-coins').textContent = state.coins;
   $('#welcome-name').textContent = state.name;
@@ -325,15 +372,17 @@ async function fetchAIQuestion() {
   questionCount++;
   
   if (!GROQ_API_KEY) {
-    $('#loading-state').innerHTML = '<p style="color: var(--text); font-size: 18px;">Error: API Key missing.</p>';
+    $('#loading-state').innerHTML = '<p style="color: var(--danger); font-size: 20px;">Error: API Key missing.</p>';
     return;
   }
 
   let qType = "multiple-choice";
   if (sessionData.streak >= 2 || questionCount % 3 === 0) qType = "short-answer";
 
-  const prompt = `You are an API that ONLY outputs valid JSON. No markdown, no text before or after.
-  Generate a math question for Grade ${sessionData.grade} on "${sessionData.topic}". Type: ${qType}.
+  const prompt = `You are a strict, competitive math Olympiad coach. You ONLY output valid JSON. No markdown, no text.
+  Generate a VERY HARD, tricky math question for a Grade ${sessionData.grade} student on "${sessionData.topic}". 
+  It MUST be a multi-step word problem, a conceptual trap, or something that tests deep understanding, NOT just basic arithmetic. 
+  Type: ${qType}.
   JSON keys required: "title", "question", "type", "options" (array of 4 strings, or empty array if text), "answer" (string), "explanation" (string).`;
 
   try {
@@ -343,7 +392,7 @@ async function fetchAIQuestion() {
       body: JSON.stringify({ 
         model: "openai/gpt-oss-120b", 
         messages: [{ role: "user", content: prompt }], 
-        temperature: 0.6, 
+        temperature: 0.7, 
         response_format: { type: "json_object" } 
       })
     });
@@ -364,7 +413,7 @@ async function fetchAIQuestion() {
     renderQuestionUI();
   } catch (err) {
     $('#loading-state').innerHTML = `
-      <p style="color: var(--text); font-size: 18px; margin-bottom: 20px;">Error: ${err.message}</p>
+      <p style="color: var(--danger); font-size: 20px; margin-bottom: 20px;">Error: ${err.message}</p>
       <button class="btn" onclick="fetchAIQuestion()">Try Again</button>
     `;
   }
@@ -375,6 +424,13 @@ function renderQuestionUI() {
   $('#question-state').style.display = 'block';
   $('#question-counter').textContent = `QUESTION ${questionCount}`;
   $('#question-type').textContent = currentQuestion.type === 'mcq' ? 'MCQ' : 'SHORT ANSWER';
+  
+  if (sessionData.streak > 1) {
+    $('#combo-text').style.display = 'block';
+    $('#streak-count').textContent = sessionData.streak;
+  } else {
+    $('#combo-text').style.display = 'none';
+  }
   
   const contentEl = $('#q-content');
   contentEl.innerHTML = `<div class="math-expr">${currentQuestion.question}</div>`;
@@ -389,6 +445,13 @@ function renderQuestionUI() {
   nextBtn.disabled = true;
   nextBtn.textContent = 'Check';
   $('#hint-btn').disabled = false;
+  
+  if (currentQuestion.type === 'mcq' && state.fiftyTokens > 0) {
+    $('#fifty-btn').style.display = 'block';
+    $('#fifty-btn').disabled = false;
+  } else {
+    $('#fifty-btn').style.display = 'none';
+  }
 
   if (currentQuestion.type === 'mcq') {
     const answersEl = document.createElement('div');
@@ -403,7 +466,7 @@ function renderQuestionUI() {
         if (isChecked) return;
         selectedAnswer = ans;
         $$('.answer').forEach(b => b.style.borderColor = 'var(--border)');
-        btn.style.borderColor = 'var(--text)';
+        btn.style.borderColor = 'var(--text-muted)';
         nextBtn.disabled = false;
       });
       answersEl.appendChild(btn);
@@ -415,7 +478,7 @@ function renderQuestionUI() {
     const input = document.createElement('input');
     input.type = 'text';
     input.className = 'input-answer';
-    input.placeholder = 'Answer...';
+    input.placeholder = 'Type answer...';
     input.addEventListener('input', (e) => {
       selectedAnswer = e.target.value.trim();
       nextBtn.disabled = selectedAnswer.length === 0;
@@ -425,8 +488,21 @@ function renderQuestionUI() {
   }
 }
 
+$('#fifty-btn').addEventListener('click', () => {
+  if (state.fiftyTokens <= 0 || isChecked) return;
+  state.fiftyTokens--;
+  saveProfile();
+  $('#fifty-btn').disabled = true;
+  
+  const answers = $$('.answer');
+  const wrongAnswers = answers.filter(a => a.textContent !== currentQuestion.answer);
+  wrongAnswers.sort(() => Math.random() - 0.5);
+  
+  wrongAnswers.slice(0, 2).forEach(a => a.classList.add('hidden-5050'));
+});
+
 $('#hint-btn').addEventListener('click', async () => {
-  if (currentHint) return;
+  if (currentHint || isChecked) return;
   if (state.hintTokens > 0) { state.hintTokens--; saveProfile(); } 
   else { if (state.xp < 5) { alert("Need 5 XP!"); return; } state.xp -= 5; saveProfile(); updateUI(); }
   
@@ -463,19 +539,30 @@ $('#next-btn').addEventListener('click', () => {
     if (isCorrect) {
       sessionData.correctCount++; sessionData.streak++;
       let xpEarned = state.doubleXp ? 20 : 10;
-      state.xp += xpEarned; state.coins += 5;
+      let coinEarned = 10;
+      
+      if (sessionData.streak >= 3) {
+        xpEarned *= 2;
+        coinEarned *= 2;
+      }
+      
+      state.xp += xpEarned; 
+      state.coins += coinEarned;
       saveProfile(); updateUI();
-      $('#feedback').innerHTML = `<strong>Correct!</strong> +${xpEarned} XP.<br><br>${currentQuestion.explanation || ''}`;
+      
+      $('#feedback').innerHTML = `<span style="color:var(--success)">CORRECT!</span> +${xpEarned} XP, +${coinEarned} Coins.<br><br>${currentQuestion.explanation || ''}`;
       if (currentQuestion.type === 'mcq') $$('.answer').forEach(b => { if (b.textContent === selectedAnswer) b.classList.add('correct'); });
     } else {
       sessionData.streak = 0;
-      $('#feedback').innerHTML = `<strong>Incorrect.</strong> Answer: ${currentQuestion.answer}.<br><br>${currentQuestion.explanation || ''}`;
+      $('#feedback').innerHTML = `<span style="color:var(--danger)">INCORRECT.</span> Answer: ${currentQuestion.answer}.<br><br>${currentQuestion.explanation || ''}`;
       if (currentQuestion.type === 'mcq') {
         $$('.answer').forEach(b => {
           if (b.textContent === selectedAnswer) b.classList.add('wrong');
           if (b.textContent === currentQuestion.answer) b.classList.add('correct');
         });
       }
+      $('.panel').classList.add('shake');
+      setTimeout(() => $('.panel').classList.remove('shake'), 300);
     }
     
     if (currentQuestion.type === 'mcq') $$('.answer').forEach(b => b.disabled = true);
@@ -492,7 +579,7 @@ $('#end-session-btn').addEventListener('click', () => {
   $('#stat-grade').textContent = sessionData.grade; $('#stat-topic').textContent = sessionData.topic;
   $('#stat-total').textContent = sessionData.totalCount; $('#stat-correct').textContent = sessionData.correctCount;
   $('#stat-acc').textContent = Math.round((sessionData.correctCount / sessionData.totalCount) * 100) + '%';
-  $('#stat-xp-earned').textContent = sessionData.correctCount * (state.doubleXp ? 20 : 10);
+  $('#stat-xp-earned').textContent = state.xp;
   switchPage('stats');
 });
 
@@ -500,6 +587,7 @@ window.buyItem = (type, cost) => {
   if (state.coins >= cost) {
     state.coins -= cost;
     if (type === 'hint') state.hintTokens++;
+    if (type === 'fifty') state.fiftyTokens++;
     if (type === 'xp') state.doubleXp = true;
     saveProfile(); updateUI();
     alert(`Purchased!`);
