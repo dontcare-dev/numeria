@@ -8,143 +8,151 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
 
 :root {
-  --bg: #050505;
-  --glass-bg: rgba(20, 20, 25, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-highlight: rgba(255, 255, 255, 0.15);
-  --glass-shadow: rgba(0, 0, 0, 0.5);
-  --text: #ffffff;
-  --muted: #8b95b0;
-  --accent: #8b5cf6;
-  --accent-glow: rgba(139, 92, 246, 0.3);
-  --radius: 20px;
+  --bg: #000000;
+  --surface: #121212;
+  --surface-hover: #1e1e1e;
+  --border: #262626;
+  --text: #f5f5f5;
+  --text-muted: #a3a3a3;
+  --accent: #ffffff;
+  --accent-text: #000000;
+  --radius: 16px;
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; overflow-x: hidden; }
+body { margin: 0; background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
 #math-bg {
-  position: fixed; inset: 0; z-index: -1; opacity: 0.15; pointer-events: none;
+  position: fixed; inset: 0; z-index: -1; opacity: 0.03; pointer-events: none;
   display: flex; flex-wrap: wrap; justify-content: space-around; align-content: space-around;
-  font-family: 'Times New Roman', serif; font-size: 3.5rem; color: #8b5cf6;
+  font-family: 'Times New Roman', serif; font-size: 4rem; color: #ffffff;
   overflow: hidden; padding: 20px; user-select: none; word-break: break-all;
-  text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
 }
 
-button { font: inherit; cursor: pointer; color: inherit; border: 0; background: none; }
+button { font: inherit; cursor: pointer; color: inherit; border: 0; background: none; transition: all 0.2s ease; }
 input, select, textarea { font: inherit; color: inherit; }
-button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
-.glass {
-  background: var(--glass-bg); backdrop-filter: blur(24px) saturate(150%); -webkit-backdrop-filter: blur(24px) saturate(150%);
-  border: 1px solid var(--glass-border); border-top: 1px solid var(--glass-highlight); border-left: 1px solid var(--glass-highlight);
-  box-shadow: 0 8px 32px 0 var(--glass-shadow); transition: background 0.3s ease, border-color 0.3s ease;
-}
-
-#world { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -2; opacity: 0.3; pointer-events: none; }
-
-/* LOGIN SCREEN - BLACK & WHITE */
+/* LOGIN SCREEN */
 #login-screen { 
   position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; 
-  background: #000; color: #fff;
+  background: var(--bg); padding: 20px;
 }
 #login-screen.hidden { display: none; }
 .login-box { 
-  width: 100%; max-width: 400px; padding: 40px; border-radius: 24px; text-align: center; 
-  background: #111; border: 1px solid #333; 
+  width: 100%; max-width: 380px; padding: 40px 32px; border-radius: 24px; text-align: center; 
+  background: var(--surface); border: 1px solid var(--border); 
 }
-.login-box h1 { font: 700 28px 'Space Grotesk'; margin: 0 0 8px; letter-spacing: -1px; color: #fff; }
-.login-box p { color: #888; font-size: 14px; margin: 0 0 24px; }
+.login-box h1 { font: 600 28px 'Space Grotesk'; margin: 0 0 8px; letter-spacing: -0.5px; }
+.login-box p { color: var(--text-muted); font-size: 14px; margin: 0 0 32px; }
 .login-input { 
-  width: 100%; padding: 14px 16px; border-radius: 12px; background: #000; border: 1px solid #333; 
-  margin-bottom: 16px; transition: border-color 0.2s; color: #fff;
+  width: 100%; padding: 14px 16px; border-radius: 12px; background: #000; border: 1px solid var(--border); 
+  margin-bottom: 12px; color: var(--text); font-size: 15px; transition: border-color 0.2s;
 }
-.login-input:focus { outline: none; border-color: #fff; }
+.login-input:focus { outline: none; border-color: #555; }
 .login-btn { 
-  width: 100%; padding: 14px; border-radius: 12px; background: #fff; color: #000; 
-  font-weight: 600; margin-bottom: 16px; transition: filter 0.2s; 
+  width: 100%; padding: 14px; border-radius: 12px; background: var(--accent); color: var(--accent-text); 
+  font-weight: 600; font-size: 15px; margin-top: 8px; margin-bottom: 24px;
 }
-.login-btn:hover { filter: brightness(0.8); }
-.auth-toggle { font-size: 13px; color: #888; cursor: pointer; transition: color 0.2s; }
-.auth-toggle:hover { color: #fff; }
-.error-msg { color: #ef4444; font-size: 13px; margin-bottom: 16px; min-height: 20px; }
+.login-btn:hover { background: #e0e0e0; transform: translateY(-1px); }
+.login-btn:active { transform: translateY(0); }
+.auth-toggle { font-size: 13px; color: var(--text-muted); cursor: pointer; }
+.auth-toggle:hover { color: #fff; text-decoration: underline; }
+.error-msg { color: #ff453a; font-size: 13px; margin-bottom: 16px; min-height: 18px; font-weight: 500; }
+.success-msg { color: #30d158; font-size: 13px; margin-bottom: 16px; min-height: 18px; font-weight: 500; }
 
+/* APP LAYOUT */
 #app { display: none; flex-direction: column; min-height: 100vh; }
 #app.active { display: flex; }
 
-.topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; margin: 16px 24px; border-radius: var(--radius); z-index: 20; }
-.brand { display: flex; align-items: center; gap: 10px; font: 700 18px 'Space Grotesk'; letter-spacing: -0.5px; }
-.logo { height: 32px; width: 32px; border-radius: 8px; background: var(--accent); display: grid; place-items: center; color: white; font-size: 16px; font-weight: 700; }
-.top-actions { display: flex; align-items: center; gap: 12px; }
-.pill { display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; }
-.icon-btn { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; }
+.topbar { 
+  height: 64px; display: flex; align-items: center; justify-content: space-between; 
+  padding: 0 24px; margin: 0; border-bottom: 1px solid var(--border); 
+  background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 20;
+}
+.brand { display: flex; align-items: center; gap: 12px; font: 600 18px 'Space Grotesk'; }
+.logo { height: 28px; width: 28px; border-radius: 8px; background: var(--accent); display: grid; place-items: center; color: var(--accent-text); font-size: 14px; font-weight: 700; }
+.top-actions { display: flex; align-items: center; gap: 10px; }
+.pill { 
+  display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; 
+  font-size: 13px; font-weight: 500; background: var(--surface); border: 1px solid var(--border); 
+}
+.icon-btn { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--border); }
+.icon-btn:hover { background: var(--surface-hover); }
 
-.layout { width: min(1200px, 95vw); margin: 0 auto 60px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 32px; }
-.sidebar { display: flex; flex-direction: column; gap: 6px; }
-.nav-btn { display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px 16px; border-radius: 12px; color: var(--muted); font-weight: 500; font-size: 14px; transition: 0.2s; }
-.nav-btn:hover { background: var(--glass-bg); color: var(--text); }
-.nav-btn.active { background: var(--glass-bg); color: var(--text); box-shadow: 0 4px 12px var(--glass-shadow); border: 1px solid var(--glass-border); }
+.layout { width: min(1000px, 92vw); margin: 40px auto; display: grid; grid-template-columns: 200px 1fr; gap: 40px; }
+.sidebar { display: flex; flex-direction: column; gap: 4px; }
+.nav-btn { 
+  display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 14px; 
+  border-radius: 10px; color: var(--text-muted); font-weight: 500; font-size: 14px; 
+}
+.nav-btn:hover { background: var(--surface); color: var(--text); }
+.nav-btn.active { background: var(--surface); color: var(--text); font-weight: 600; }
 .nav-icon { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
 .main { min-width: 0; }
-.page { display: none; animation: fadeIn 0.3s ease; }
+.page { display: none; animation: fadeIn 0.4s ease; }
 .page.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.heading-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; }
-.heading-row h1 { font: 700 28px 'Space Grotesk'; letter-spacing: -1px; margin: 4px 0 0; }
-.heading-row p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+.heading-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; }
+.heading-row h1 { font: 600 32px 'Space Grotesk'; letter-spacing: -1px; margin: 0 0 4px; }
+.heading-row p { margin: 0; color: var(--text-muted); font-size: 15px; }
 
-.btn { border-radius: 12px; padding: 10px 18px; font-weight: 600; font-size: 13px; background: var(--glass-bg); border: 1px solid var(--glass-border); transition: 0.2s; display: inline-flex; align-items: center; gap: 6px; }
-.btn:hover { background: var(--glass-highlight); transform: translateY(-1px); }
-.btn.primary { background: var(--accent); color: white; border-color: transparent; box-shadow: 0 4px 15px var(--accent-glow); }
-.btn.primary:hover { filter: brightness(1.1); }
-.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn { 
+  border-radius: 10px; padding: 10px 16px; font-weight: 500; font-size: 14px; 
+  background: var(--surface); border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 8px; 
+}
+.btn:hover { background: var(--surface-hover); }
+.btn.primary { background: var(--accent); color: var(--accent-text); border-color: transparent; font-weight: 600; }
+.btn.primary:hover { background: #e0e0e0; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-.panel { padding: 24px; border-radius: 20px; margin-bottom: 24px; }
+.panel { background: var(--surface); border: 1px solid var(--border); padding: 32px; border-radius: var(--radius); margin-bottom: 24px; }
 .form-group { margin-bottom: 20px; }
-.form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--muted); }
-.form-control { width: 100%; padding: 14px; border-radius: 12px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); transition: 0.2s; }
-.form-control:focus { outline: none; border-color: var(--accent); }
+.form-group label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: var(--text-muted); }
+.form-control { width: 100%; padding: 12px 14px; border-radius: 10px; background: #000; border: 1px solid var(--border); font-size: 15px; }
+.form-control:focus { outline: none; border-color: #555; }
 
-.question { font: 700 20px 'Space Grotesk'; margin: 24px 0; line-height: 1.5; }
-.math-expr { font: 700 24px 'Space Grotesk'; text-align: center; margin: 32px 0; color: var(--accent); }
-.answers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.answer { padding: 16px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); font-weight: 600; transition: 0.2s; text-align: center; }
-.answer:hover { border-color: var(--accent); }
-.answer.correct { border-color: #22c55e; background: rgba(34, 197, 94, 0.1); color: #22c55e; }
-.answer.wrong { border-color: #ef4444; background: rgba(239, 68, 68, 0.1); color: #ef4444; }
-.feedback { margin-top: 16px; font-size: 14px; font-weight: 600; min-height: 20px; }
-.hint-box { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); padding: 12px; border-radius: 12px; font-size: 13px; margin-top: 16px; color: #f59e0b; display: none; }
+.question { font: 600 22px 'Space Grotesk'; margin: 24px 0; line-height: 1.4; }
+.math-expr { font: 500 20px 'Space Grotesk'; line-height: 1.6; margin: 24px 0; color: #e5e5e5; }
+.answers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+.answer { padding: 16px; border-radius: 10px; background: #000; border: 1px solid var(--border); font-weight: 500; text-align: center; font-size: 15px; }
+.answer:hover { border-color: #555; }
+.answer.correct { border-color: #30d158; background: rgba(48, 209, 88, 0.1); color: #30d158; }
+.answer.wrong { border-color: #ff453a; background: rgba(255, 69, 58, 0.1); color: #ff453a; }
+.feedback { margin-top: 20px; font-size: 14px; line-height: 1.5; color: var(--text-muted); }
+.hint-box { background: rgba(255, 214, 10, 0.1); border: 1px solid rgba(255, 214, 10, 0.3); padding: 12px 16px; border-radius: 10px; font-size: 14px; margin-top: 16px; color: #ffd60a; display: none; }
 
-.input-group { display: flex; gap: 12px; margin-bottom: 16px; }
-.input-answer { flex: 1; padding: 16px; border-radius: 12px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); font-size: 16px; }
-.mic-btn { width: 52px; border-radius: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); display: grid; place-items: center; font-size: 20px; transition: 0.2s; }
-.mic-btn:hover { background: var(--glass-highlight); }
-.mic-btn.recording { background: #ef4444; color: white; animation: pulse 1.5s infinite; }
-@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+.input-group { display: flex; gap: 12px; margin-top: 24px; }
+.input-answer { flex: 1; padding: 16px; border-radius: 10px; background: #000; border: 1px solid var(--border); font-size: 16px; }
+.mic-btn { width: 52px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); display: grid; place-items: center; transition: 0.2s; }
+.mic-btn:hover { background: var(--surface-hover); }
+.mic-btn.recording { background: #ff453a; border-color: #ff453a; color: white; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
 
-.loader { width: 24px; height: 24px; border: 3px solid var(--glass-border); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 16px; }
+.loader { width: 24px; height: 24px; border: 2px solid var(--border); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 16px; }
 
-.shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-.shop-item { padding: 24px; border-radius: 20px; background: var(--glass-bg); border: 1px solid var(--glass-border); display: flex; flex-direction: column; align-items: flex-start; position: relative; overflow: hidden; backdrop-filter: blur(10px); }
-.shop-icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; margin-bottom: 16px; color: white; }
-.shop-item h3 { margin: 0 0 8px; font-size: 16px; }
-.shop-item p { color: var(--muted); font-size: 13px; margin: 0 0 20px; flex: 1; }
+.shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.shop-item { padding: 24px; border-radius: 16px; background: var(--surface); border: 1px solid var(--border); display: flex; flex-direction: column; }
+.shop-icon { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; margin-bottom: 16px; background: var(--border); color: #fff; }
+.shop-item h3 { margin: 0 0 4px; font-size: 16px; font-weight: 600; }
+.shop-item p { color: var(--text-muted); font-size: 13px; margin: 0 0 24px; flex: 1; line-height: 1.4; }
 .shop-bottom { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-.shop-price { font: 700 16px 'Space Grotesk'; color: var(--accent); display: flex; align-items: center; gap: 4px; }
+.shop-price { font: 600 16px 'Space Grotesk'; color: var(--text); }
 
 .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
-.stat-card { padding: 20px; border-radius: 16px; background: var(--glass-bg); border: 1px solid var(--glass-border); text-align: center; }
-.stat-card h3 { margin: 0 0 8px; color: var(--muted); font-size: 14px; font-weight: 600; text-transform: uppercase; }
-.stat-card p { font: 700 28px 'Space Grotesk'; margin: 0; color: var(--accent); }
+.stat-card { padding: 24px; border-radius: 16px; background: var(--surface); border: 1px solid var(--border); text-align: center; }
+.stat-card h3 { margin: 0 0 8px; color: var(--text-muted); font-size: 13px; font-weight: 500; }
+.stat-card p { font: 600 32px 'Space Grotesk'; margin: 0; color: var(--text); }
 
 @media(max-width: 768px) {
-  .layout { grid-template-columns: 1fr; }
+  .layout { grid-template-columns: 1fr; gap: 24px; margin: 24px auto; }
   .sidebar { display: none; }
   .answers, .shop-grid, .stats-grid { grid-template-columns: 1fr; }
-  .login-box { padding: 24px; }
+  .topbar { padding: 0 16px; }
+  .login-box { padding: 32px 24px; }
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -156,35 +164,34 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
   ∫ e^x dx &nbsp; ∇ × F &nbsp; ∑ i^2 &nbsp; lim (x→0) sin(x)/x = 1 &nbsp; √-1 &nbsp; ∂²z/∂x∂y &nbsp; π ≈ 3.14159 &nbsp; f'(x) = lim h→0 [f(x+h)-f(x)]/h &nbsp; ∮ B·dl = μ₀I &nbsp; E=mc² &nbsp; a² + b² = c² &nbsp; ∏ (1+1/n) &nbsp; Γ(n) = (n-1)! &nbsp; ℵ₀ &nbsp; ℝ &nbsp; ℂ &nbsp; ∂f/∂x &nbsp; ∬ D dA &nbsp; λ &nbsp; θ &nbsp; Ω &nbsp; ∆ &nbsp; ∫∫∫ &nbsp; e^(iπ) + 1 = 0 &nbsp; σ² &nbsp; μ &nbsp; ∑ &nbsp; ∏ &nbsp; √ &nbsp; ∞
 </div>
 
-<canvas id="world"></canvas>
-
 <div id="login-screen">
   <div class="login-box">
-    <h1 id="auth-title">Numeria</h1>
-    <p id="auth-subtitle">Sign in to sync your progress.</p>
+    <h1 id="auth-title">Welcome</h1>
+    <p id="auth-subtitle">Sign in to your Numeria account.</p>
     
     <div class="error-msg" id="auth-error"></div>
+    <div class="success-msg" id="auth-success"></div>
 
-    <input type="email" id="auth-email" class="login-input" placeholder="Email Address">
-    <input type="password" id="auth-password" class="login-input" placeholder="Password">
+    <input type="email" id="auth-email" class="login-input" placeholder="Email Address" autocomplete="email">
+    <input type="password" id="auth-password" class="login-input" placeholder="Password" autocomplete="current-password">
     
-    <button class="login-btn" id="login-btn">Sign In</button>
+    <button class="login-btn" id="login-btn">Continue</button>
     
     <div class="auth-toggle" id="auth-toggle">Don't have an account? Sign Up</div>
   </div>
 </div>
 
 <div id="app">
-  <header class="topbar glass">
+  <header class="topbar">
     <div class="brand">
       <div class="logo">N</div>Numeria
     </div>
     <div class="top-actions">
-      <div class="pill glass" id="xp-pill">XP: 0</div>
-      <div class="pill glass" id="coin-pill">Coins: 0</div>
-      <div class="pill glass" id="user-pill">User</div>
-      <button class="icon-btn glass" id="logout-btn" title="Logout">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+      <div class="pill" id="xp-pill">XP: 0</div>
+      <div class="pill" id="coin-pill">Coins: 0</div>
+      <div class="pill" id="user-pill">User</div>
+      <button class="icon-btn" id="logout-btn" title="Logout">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
       </button>
     </div>
   </header>
@@ -195,7 +202,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
         <svg class="nav-icon" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7M5 9v12h14V9"/></svg>Dashboard
       </button>
       <button class="nav-btn" data-page="learn">
-        <svg class="nav-icon" viewBox="0 0 24 24"><path d="m4 20 4.5-1 11-11a2.1 2.1 0 0 0-3-3l-11 11L4 20Z"/></svg>AI Tutor
+        <svg class="nav-icon" viewBox="0 0 24 24"><path d="m4 20 4.5-1 11-11a2.1 2.1 0 0 0-3-3l-11 11L4 20Z"/></svg>Tutor
       </button>
       <button class="nav-btn" data-page="shop">
         <svg class="nav-icon" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop
@@ -206,16 +213,16 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
       <section class="page active" id="page-home">
         <div class="heading-row">
           <div>
-            <h1>Welcome, <span id="welcome-name">Explorer</span></h1>
-            <p>Configure your AI learning session below.</p>
+            <h1>Overview</h1>
+            <p>Welcome back, <span id="welcome-name">Explorer</span>.</p>
           </div>
         </div>
         
-        <div class="panel glass">
-          <h2 style="font: 700 24px 'Space Grotesk'; margin-top: 0;">Session Setup</h2>
+        <div class="panel">
+          <h2 style="font: 600 20px 'Space Grotesk'; margin: 0 0 24px;">Start a Session</h2>
           
           <div class="form-group">
-            <label>Select Grade Level</label>
+            <label>Grade Level</label>
             <select id="grade-select" class="form-control">
               <option value="5">Grade 5</option>
               <option value="6">Grade 6</option>
@@ -229,31 +236,31 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
           </div>
           
           <div class="form-group">
-            <label>What topic do you want to practice? (e.g., Fractions, Algebra, Geometry)</label>
-            <input type="text" id="topic-input" class="form-control" placeholder="Type any math topic here...">
+            <label>Topic</label>
+            <input type="text" id="topic-input" class="form-control" placeholder="e.g., Fractions, Algebra, Geometry">
           </div>
           
-          <button class="btn primary" style="width: 100%; justify-content: center;" id="start-session-btn">Start Session</button>
+          <button class="btn primary" style="width: 100%; justify-content: center; margin-top: 12px;" id="start-session-btn">Start Learning</button>
         </div>
       </section>
 
       <section class="page" id="page-learn">
         <div class="heading-row">
           <div>
-            <h1 id="session-title">AI Tutor</h1>
-            <p id="session-subtitle">Generating custom curriculum...</p>
+            <h1 id="session-title">Tutor Session</h1>
+            <p id="session-subtitle">Generating questions...</p>
           </div>
           <button class="btn" id="end-session-btn">End Session</button>
         </div>
         
-        <div class="panel glass">
+        <div class="panel">
           <div id="loading-state" style="display: none; text-align: center; padding: 40px 0;">
             <div class="loader"></div>
-            <p style="color: var(--muted); font-size: 14px;">Consulting AI Professor...</p>
+            <p style="color: var(--text-muted); font-size: 14px;">Consulting AI...</p>
           </div>
           
           <div id="question-state" style="display: none;">
-            <div id="question-counter" style="color:var(--muted);font-size:13px;font-weight:600;margin-bottom:16px;">QUESTION 1</div>
+            <div id="question-counter" style="color:var(--text-muted);font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:16px;">QUESTION 1</div>
             <div class="question" id="q-title">Waiting...</div>
             
             <div id="q-content"></div>
@@ -262,8 +269,8 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
             
             <div id="hint-box" class="hint-box"></div>
             
-            <div style="display:flex;justify-content:space-between;margin-top:24px;">
-              <button class="btn" id="hint-btn" style="color: #f59e0b; border-color: #f59e0b;">Get Hint (-5 XP)</button>
+            <div style="display:flex;justify-content:space-between;margin-top:32px;">
+              <button class="btn" id="hint-btn">Get Hint</button>
               <button class="btn primary" id="next-btn" disabled>Check Answer</button>
             </div>
           </div>
@@ -274,56 +281,47 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
         <div class="heading-row">
           <div>
             <h1>Shop</h1>
-            <p>Spend your hard-earned coins on power-ups.</p>
+            <p>Power-ups for your learning.</p>
           </div>
-          <div class="pill glass" style="background: rgba(139, 92, 246, 0.2); border-color: var(--accent);">
-            Your Coins: <span id="shop-coins" style="color: var(--accent); font-weight: 700; margin-left: 4px;">0</span>
+          <div class="pill">
+            Your Coins: <span id="shop-coins" style="font-weight: 600; margin-left: 4px;">0</span>
           </div>
         </div>
         
         <div class="shop-grid">
           <div class="shop-item">
-            <div class="shop-icon" style="background: #f59e0b;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1.45.62 2.84 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/></svg>
+            <div class="shop-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1.45.62 2.84 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/></svg>
             </div>
             <h3>Hint Token</h3>
             <p>Reveal a hint without the 5 XP penalty.</p>
             <div class="shop-bottom">
-              <div class="shop-price">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
-                50
-              </div>
-              <button class="btn primary" onclick="buyItem('hint', 50)">Buy</button>
+              <div class="shop-price">50 Coins</div>
+              <button class="btn" onclick="buyItem('hint', 50)">Buy</button>
             </div>
           </div>
 
           <div class="shop-item">
-            <div class="shop-icon" style="background: #22c55e;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <div class="shop-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             </div>
-            <h3>Double XP (10 mins)</h3>
+            <h3>Double XP</h3>
             <p>Earn 20 XP instead of 10 for correct answers.</p>
             <div class="shop-bottom">
-              <div class="shop-price">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
-                150
-              </div>
-              <button class="btn primary" onclick="buyItem('xp', 150)">Buy</button>
+              <div class="shop-price">150 Coins</div>
+              <button class="btn" onclick="buyItem('xp', 150)">Buy</button>
             </div>
           </div>
 
           <div class="shop-item">
-            <div class="shop-icon" style="background: #3b82f6;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="shop-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
             <h3>Focus Shield</h3>
             <p>Prevents streak resets for 3 wrong answers.</p>
             <div class="shop-bottom">
-              <div class="shop-price">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
-                200
-              </div>
-              <button class="btn primary" onclick="buyItem('shield', 200)">Buy</button>
+              <div class="shop-price">200 Coins</div>
+              <button class="btn" onclick="buyItem('shield', 200)">Buy</button>
             </div>
           </div>
         </div>
@@ -332,19 +330,19 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
       <section class="page" id="page-stats">
         <div class="heading-row">
           <div>
-            <h1>Session Summary</h1>
-            <p>Your performance report for Grade <span id="stat-grade"></span> - <span id="stat-topic"></span></p>
+            <h1>Summary</h1>
+            <p>Grade <span id="stat-grade"></span> - <span id="stat-topic"></span></p>
           </div>
         </div>
         
         <div class="stats-grid">
           <div class="stat-card">
-            <h3>Questions Answered</h3>
+            <h3>Answered</h3>
             <p id="stat-total">0</p>
           </div>
           <div class="stat-card">
-            <h3>Correct Answers</h3>
-            <p id="stat-correct" style="color: #22c55e;">0</p>
+            <h3>Correct</h3>
+            <p id="stat-correct" style="color: #30d158;">0</p>
           </div>
           <div class="stat-card">
             <h3>Accuracy</h3>
@@ -356,11 +354,11 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
           </div>
         </div>
 
-        <div class="panel glass" style="text-align: center;">
-          <h2 style="font: 700 20px 'Space Grotesk'; margin-top: 0;">Download Exam Paper</h2>
-          <div class="pdf-actions" style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <div class="panel" style="text-align: center;">
+          <h2 style="font: 600 20px 'Space Grotesk'; margin: 0 0 24px;">Export Session</h2>
+          <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
             <button class="btn primary" id="download-exam-btn">Download Exam (PDF)</button>
-            <button class="btn" id="download-answers-btn">Download Answer Key (PDF)</button>
+            <button class="btn" id="download-answers-btn">Download Answers (PDF)</button>
           </div>
         </div>
       </section>
@@ -377,7 +375,6 @@ const $ = (s) => document.querySelector(s);
 const $$ = (s) => Array.from(document.querySelectorAll(s));
 const { jsPDF } = window.jspdf;
 
-// These pull directly from Vercel's Environment Variables
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
@@ -392,25 +389,33 @@ let sessionData = { questions: [], grade: 5, topic: 'General', correctCount: 0, 
 // AUTH LOGIC
 $('#auth-toggle').addEventListener('click', () => {
   isSignUp = !isSignUp;
-  $('#auth-title').textContent = isSignUp ? "Create Account" : "Numeria";
-  $('#auth-subtitle').textContent = isSignUp ? "Sign up to save your progress." : "Sign in to sync your progress.";
-  $('#login-btn').textContent = isSignUp ? "Sign Up" : "Sign In";
+  $('#auth-title').textContent = isSignUp ? "Create Account" : "Welcome";
+  $('#auth-subtitle').textContent = isSignUp ? "Sign up to save your progress." : "Sign in to your Numeria account.";
+  $('#login-btn').textContent = isSignUp ? "Sign Up" : "Continue";
   $('#auth-toggle').textContent = isSignUp ? "Already have an account? Sign In" : "Don't have an account? Sign Up";
   $('#auth-error').textContent = "";
+  $('#auth-success').textContent = "";
 });
 
 $('#login-btn').addEventListener('click', async () => {
   const email = $('#auth-email').value.trim();
   const password = $('#auth-password').value;
   const errorEl = $('#auth-error');
+  const successEl = $('#auth-success');
   
   if (!email || !password) {
-    errorEl.textContent = "Please enter an email and password.";
+    errorEl.textContent = "Email and password are required.";
+    return;
+  }
+  
+  if (password.length < 6) {
+    errorEl.textContent = "Password must be at least 6 characters.";
     return;
   }
 
   $('#login-btn').textContent = "Loading...";
   errorEl.textContent = "";
+  successEl.textContent = "";
 
   if (isSignUp) {
     const { data, error } = await supabase.auth.signUp({ email, password });
@@ -418,19 +423,17 @@ $('#login-btn').addEventListener('click', async () => {
       errorEl.textContent = error.message;
       $('#login-btn').textContent = "Sign Up";
     } else {
-      errorEl.style.color = "#22c55e";
-      errorEl.textContent = "Account created! You can now sign in.";
+      successEl.textContent = "Account created! You can now sign in.";
       setTimeout(() => {
         isSignUp = false;
         $('#auth-toggle').click();
-        errorEl.style.color = "#ef4444";
-      }, 1500);
+      }, 2000);
     }
   } else {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
       errorEl.textContent = error.message;
-      $('#login-btn').textContent = "Sign In";
+      $('#login-btn').textContent = "Continue";
     } else {
       currentUser = data.user;
       loadProfile();
@@ -480,6 +483,7 @@ function updateUI() {
   $('#coin-pill').textContent = `Coins: ${state.coins}`;
   $('#user-pill').textContent = state.name;
   $('#shop-coins').textContent = state.coins;
+  $('#welcome-name').textContent = state.name;
 }
 
 function switchPage(pageId) {
@@ -510,7 +514,7 @@ $('#start-session-btn').addEventListener('click', () => {
   };
   
   $('#session-title').textContent = sessionData.topic;
-  $('#session-subtitle').textContent = `Grade ${sessionData.grade} Level`;
+  $('#session-subtitle').textContent = `Grade ${sessionData.grade}`;
   
   questionCount = 0;
   switchPage('learn');
@@ -552,7 +556,7 @@ async function fetchAIQuestion() {
     sessionData.questions.push(currentQuestion);
     renderQuestionUI();
   } catch (err) {
-    $('#loading-state').innerHTML = `<p style="color: #ef4444;">Error: ${err.message}</p>`;
+    $('#loading-state').innerHTML = `<p style="color: #ff453a; font-size: 14px;">Error: ${err.message}</p>`;
   }
 }
 
@@ -560,7 +564,7 @@ function renderQuestionUI() {
   $('#loading-state').style.display = 'none';
   $('#question-state').style.display = 'block';
   
-  $('#question-counter').textContent = `QUESTION ${questionCount} - ${currentQuestion.type === 'mcq' ? 'Multiple Choice' : 'Word Problem'}`;
+  $('#question-counter').textContent = `QUESTION ${questionCount} - ${currentQuestion.type === 'mcq' ? 'MULTIPLE CHOICE' : 'SHORT ANSWER'}`;
   $('#q-title').textContent = currentQuestion.title || 'Problem:';
   
   const contentEl = $('#q-content');
@@ -568,10 +572,6 @@ function renderQuestionUI() {
   
   const mathDiv = document.createElement('div');
   mathDiv.className = 'math-expr';
-  mathDiv.style.fontSize = '20px';
-  mathDiv.style.textAlign = 'left';
-  mathDiv.style.lineHeight = '1.6';
-  mathDiv.style.margin = '16px 0';
   mathDiv.textContent = currentQuestion.question;
   contentEl.appendChild(mathDiv);
   
@@ -601,8 +601,8 @@ function renderQuestionUI() {
       btn.addEventListener('click', () => {
         if (isChecked) return;
         selectedAnswer = ans;
-        $$('.answer').forEach(b => b.style.borderColor = '');
-        btn.style.borderColor = 'var(--accent)';
+        $$('.answer').forEach(b => b.style.borderColor = 'var(--border)');
+        btn.style.borderColor = '#fff';
         nextBtn.disabled = false;
       });
       answersEl.appendChild(btn);
@@ -615,7 +615,7 @@ function renderQuestionUI() {
     const input = document.createElement('input');
     input.type = 'text';
     input.className = 'input-answer';
-    input.placeholder = 'Type your answer here...';
+    input.placeholder = 'Type your answer...';
     input.id = 'text-answer';
     
     input.addEventListener('input', (e) => {
@@ -628,7 +628,7 @@ function renderQuestionUI() {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const micBtn = document.createElement('button');
       micBtn.className = 'mic-btn';
-      micBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>';
+      micBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>';
       
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognition = new SpeechRecognition();
@@ -670,6 +670,7 @@ $('#hint-btn').addEventListener('click', async () => {
     if (state.xp < 5) { alert("Not enough XP!"); return; }
     state.xp -= 5;
     saveProfile();
+    updateUI();
   }
   
   $('#hint-btn').disabled = true;
@@ -717,8 +718,8 @@ $('#next-btn').addEventListener('click', () => {
       state.xp += xpEarned;
       state.coins += 5;
       saveProfile();
-      $('#feedback').textContent = `Correct! +${xpEarned} XP, +5 Coins. ` + (currentQuestion.explanation || '');
-      $('#feedback').style.color = '#22c55e';
+      updateUI();
+      $('#feedback').innerHTML = `<span style="color: #30d158; font-weight: 600;">Correct!</span> +${xpEarned} XP, +5 Coins.<br><br>${currentQuestion.explanation || ''}`;
       
       if (currentQuestion.type === 'mcq') {
         $$('.answer').forEach(b => { if (b.textContent === selectedAnswer) b.classList.add('correct'); });
@@ -727,12 +728,10 @@ $('#next-btn').addEventListener('click', () => {
       if (state.shield > 0) {
         state.shield--;
         saveProfile();
-        $('#feedback').textContent = `Shield used! Streak protected. The correct answer was: ${currentQuestion.answer}.`;
-        $('#feedback').style.color = '#f59e0b';
+        $('#feedback').innerHTML = `<span style="color: #ffd60a; font-weight: 600;">Shield used!</span> Streak protected. The correct answer was: <strong>${currentQuestion.answer}</strong>.`;
       } else {
         sessionData.streak = 0;
-        $('#feedback').textContent = `Incorrect. The correct answer was: ${currentQuestion.answer}. ` + (currentQuestion.explanation || '');
-        $('#feedback').style.color = '#ef4444';
+        $('#feedback').innerHTML = `<span style="color: #ff453a; font-weight: 600;">Incorrect.</span> The correct answer was: <strong>${currentQuestion.answer}</strong>.<br><br>${currentQuestion.explanation || ''}`;
       }
       
       if (currentQuestion.type === 'mcq') {
@@ -861,54 +860,7 @@ $('#download-answers-btn').addEventListener('click', () => {
   
   doc.save(`Numeria_AnswerKey_Grade${sessionData.grade}.pdf`);
 });
-
-let scene, camera, renderer, group;
-function init3D() {
-  const canvas = $('#world');
-  if (!window.THREE) return;
-  
-  scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-  camera.position.set(0, 2, 10);
-  
-  renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  
-  scene.add(new THREE.AmbientLight(0xffffff, 1));
-  const light = new THREE.PointLight(0x8b5cf6, 20, 30);
-  light.position.set(2, 4, 5);
-  scene.add(light);
-  
-  group = new THREE.Group();
-  scene.add(group);
-  
-  const geo = new THREE.IcosahedronGeometry(1, 2);
-  for (let i = 0; i < 15; i++) {
-    const mat = new THREE.MeshStandardMaterial({ color: 0x6366f1, roughness: 0.6, transparent: true, opacity: 0.15 });
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.position.set((Math.random() - 0.5) * 15, (Math.random() - 0.5) * 10, -3 - Math.random() * 10);
-    mesh.scale.setScalar(0.3 + Math.random() * 0.5);
-    group.add(mesh);
-  }
-  
-  function animate() {
-    requestAnimationFrame(animate);
-    group.rotation.y += 0.001;
-    group.rotation.x += 0.0005;
-    renderer.render(scene, camera);
-  }
-  animate();
-  
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-}
-init3D();
-
 })();
 </script>
 </body>
-                                                                                                                                                                                                                                                                                                                                          </html>
+</html>
