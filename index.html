@@ -16,76 +16,39 @@
   --text-muted: #a3a3a3;
   --accent: #ffffff;
   --accent-text: #000000;
-  --radius: 16px;
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { margin: 0; background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
 
-#math-bg {
-  position: fixed; inset: 0; z-index: -1; opacity: 0.03; pointer-events: none;
-  display: flex; flex-wrap: wrap; justify-content: space-around; align-content: space-around;
-  font-family: 'Times New Roman', serif; font-size: 4rem; color: #ffffff;
-  overflow: hidden; padding: 20px; user-select: none; word-break: break-all;
-}
+button { font: inherit; cursor: pointer; color: inherit; border: 0; background: none; }
+input, select { font: inherit; color: inherit; }
 
-button { font: inherit; cursor: pointer; color: inherit; border: 0; background: none; transition: all 0.2s ease; }
-input, select, textarea { font: inherit; color: inherit; }
-button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-
-/* LOGIN SCREEN */
-#login-screen { 
-  position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; 
-  background: var(--bg); padding: 20px;
-}
+#login-screen { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background: var(--bg); padding: 20px; }
 #login-screen.hidden { display: none; }
-.login-box { 
-  width: 100%; max-width: 380px; padding: 40px 32px; border-radius: 24px; text-align: center; 
-  background: var(--surface); border: 1px solid var(--border); 
-}
-.login-box h1 { font: 600 28px 'Space Grotesk'; margin: 0 0 8px; letter-spacing: -0.5px; }
+.login-box { width: 100%; max-width: 380px; padding: 40px 32px; border-radius: 24px; text-align: center; background: var(--surface); border: 1px solid var(--border); }
+.login-box h1 { font: 600 28px 'Space Grotesk'; margin: 0 0 8px; }
 .login-box p { color: var(--text-muted); font-size: 14px; margin: 0 0 32px; }
-.login-input { 
-  width: 100%; padding: 14px 16px; border-radius: 12px; background: #000; border: 1px solid var(--border); 
-  margin-bottom: 12px; color: var(--text); font-size: 15px; transition: border-color 0.2s;
-}
+.login-input { width: 100%; padding: 14px 16px; border-radius: 12px; background: #000; border: 1px solid var(--border); margin-bottom: 12px; color: var(--text); font-size: 15px; }
 .login-input:focus { outline: none; border-color: #555; }
-.login-btn { 
-  width: 100%; padding: 14px; border-radius: 12px; background: var(--accent); color: var(--accent-text); 
-  font-weight: 600; font-size: 15px; margin-top: 8px; margin-bottom: 24px;
-}
-.login-btn:hover { background: #e0e0e0; transform: translateY(-1px); }
-.login-btn:active { transform: translateY(0); }
-.auth-toggle { font-size: 13px; color: var(--text-muted); cursor: pointer; }
-.auth-toggle:hover { color: #fff; text-decoration: underline; }
-.error-msg { color: #ff453a; font-size: 13px; margin-bottom: 16px; min-height: 18px; font-weight: 500; }
-.success-msg { color: #30d158; font-size: 13px; margin-bottom: 16px; min-height: 18px; font-weight: 500; }
+.login-btn { width: 100%; padding: 14px; border-radius: 12px; background: var(--accent); color: var(--accent-text); font-weight: 600; font-size: 15px; margin-top: 8px; }
+.login-btn:hover { background: #e0e0e0; }
+.error-msg { color: #ff453a; font-size: 13px; margin-bottom: 16px; min-height: 18px; }
 
-/* APP LAYOUT */
 #app { display: none; flex-direction: column; min-height: 100vh; }
 #app.active { display: flex; }
 
-.topbar { 
-  height: 64px; display: flex; align-items: center; justify-content: space-between; 
-  padding: 0 24px; margin: 0; border-bottom: 1px solid var(--border); 
-  background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 20;
-}
+.topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 20; }
 .brand { display: flex; align-items: center; gap: 12px; font: 600 18px 'Space Grotesk'; }
 .logo { height: 28px; width: 28px; border-radius: 8px; background: var(--accent); display: grid; place-items: center; color: var(--accent-text); font-size: 14px; font-weight: 700; }
 .top-actions { display: flex; align-items: center; gap: 10px; }
-.pill { 
-  display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; 
-  font-size: 13px; font-weight: 500; background: var(--surface); border: 1px solid var(--border); 
-}
+.pill { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; font-size: 13px; background: var(--surface); border: 1px solid var(--border); }
 .icon-btn { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--border); }
 .icon-btn:hover { background: var(--surface-hover); }
 
 .layout { width: min(1000px, 92vw); margin: 40px auto; display: grid; grid-template-columns: 200px 1fr; gap: 40px; }
 .sidebar { display: flex; flex-direction: column; gap: 4px; }
-.nav-btn { 
-  display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 14px; 
-  border-radius: 10px; color: var(--text-muted); font-weight: 500; font-size: 14px; 
-}
+.nav-btn { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 14px; border-radius: 10px; color: var(--text-muted); font-weight: 500; font-size: 14px; }
 .nav-btn:hover { background: var(--surface); color: var(--text); }
 .nav-btn.active { background: var(--surface); color: var(--text); font-weight: 600; }
 .nav-icon { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
@@ -100,16 +63,13 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .heading-row h1 { font: 600 32px 'Space Grotesk'; letter-spacing: -1px; margin: 0 0 4px; }
 .heading-row p { margin: 0; color: var(--text-muted); font-size: 15px; }
 
-.btn { 
-  border-radius: 10px; padding: 10px 16px; font-weight: 500; font-size: 14px; 
-  background: var(--surface); border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 8px; 
-}
+.btn { border-radius: 10px; padding: 10px 16px; font-weight: 500; font-size: 14px; background: var(--surface); border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 8px; }
 .btn:hover { background: var(--surface-hover); }
 .btn.primary { background: var(--accent); color: var(--accent-text); border-color: transparent; font-weight: 600; }
 .btn.primary:hover { background: #e0e0e0; }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-.panel { background: var(--surface); border: 1px solid var(--border); padding: 32px; border-radius: var(--radius); margin-bottom: 24px; }
+.panel { background: var(--surface); border: 1px solid var(--border); padding: 32px; border-radius: 16px; margin-bottom: 24px; }
 .form-group { margin-bottom: 20px; }
 .form-group label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: var(--text-muted); }
 .form-control { width: 100%; padding: 12px 14px; border-radius: 10px; background: #000; border: 1px solid var(--border); font-size: 15px; }
@@ -127,7 +87,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 
 .input-group { display: flex; gap: 12px; margin-top: 24px; }
 .input-answer { flex: 1; padding: 16px; border-radius: 10px; background: #000; border: 1px solid var(--border); font-size: 16px; }
-.mic-btn { width: 52px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); display: grid; place-items: center; transition: 0.2s; }
+.mic-btn { width: 52px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); display: grid; place-items: center; }
 .mic-btn:hover { background: var(--surface-hover); }
 .mic-btn.recording { background: #ff453a; border-color: #ff453a; color: white; animation: pulse 1.5s infinite; }
 @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
@@ -160,24 +120,16 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 </head>
 <body>
 
-<div id="math-bg">
-  ∫ e^x dx &nbsp; ∇ × F &nbsp; ∑ i^2 &nbsp; lim (x→0) sin(x)/x = 1 &nbsp; √-1 &nbsp; ∂²z/∂x∂y &nbsp; π ≈ 3.14159 &nbsp; f'(x) = lim h→0 [f(x+h)-f(x)]/h &nbsp; ∮ B·dl = μ₀I &nbsp; E=mc² &nbsp; a² + b² = c² &nbsp; ∏ (1+1/n) &nbsp; Γ(n) = (n-1)! &nbsp; ℵ₀ &nbsp; ℝ &nbsp; ℂ &nbsp; ∂f/∂x &nbsp; ∬ D dA &nbsp; λ &nbsp; θ &nbsp; Ω &nbsp; ∆ &nbsp; ∫∫∫ &nbsp; e^(iπ) + 1 = 0 &nbsp; σ² &nbsp; μ &nbsp; ∑ &nbsp; ∏ &nbsp; √ &nbsp; ∞
-</div>
-
 <div id="login-screen">
   <div class="login-box">
-    <h1 id="auth-title">Welcome</h1>
-    <p id="auth-subtitle">Sign in to your Numeria account.</p>
+    <h1>Welcome</h1>
+    <p>Enter your name to start learning.</p>
     
     <div class="error-msg" id="auth-error"></div>
-    <div class="success-msg" id="auth-success"></div>
 
-    <input type="email" id="auth-email" class="login-input" placeholder="Email Address" autocomplete="email">
-    <input type="password" id="auth-password" class="login-input" placeholder="Password" autocomplete="current-password">
+    <input type="text" id="auth-name" class="login-input" placeholder="Username">
     
     <button class="login-btn" id="login-btn">Continue</button>
-    
-    <div class="auth-toggle" id="auth-toggle">Don't have an account? Sign Up</div>
   </div>
 </div>
 
@@ -382,62 +334,57 @@ const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 let currentUser = null;
-let isSignUp = false;
 let state = { name: 'Explorer', xp: 0, coins: 0, hintTokens: 0, doubleXp: false, shield: 0 };
 let sessionData = { questions: [], grade: 5, topic: 'General', correctCount: 0, totalCount: 0, streak: 0 };
 
-// AUTH LOGIC
-$('#auth-toggle').addEventListener('click', () => {
-  isSignUp = !isSignUp;
-  $('#auth-title').textContent = isSignUp ? "Create Account" : "Welcome";
-  $('#auth-subtitle').textContent = isSignUp ? "Sign up to save your progress." : "Sign in to your Numeria account.";
-  $('#login-btn').textContent = isSignUp ? "Sign Up" : "Continue";
-  $('#auth-toggle').textContent = isSignUp ? "Already have an account? Sign In" : "Don't have an account? Sign Up";
-  $('#auth-error').textContent = "";
-  $('#auth-success').textContent = "";
-});
-
+// FAKE LOGIN LOGIC
 $('#login-btn').addEventListener('click', async () => {
-  const email = $('#auth-email').value.trim();
-  const password = $('#auth-password').value;
+  const name = $('#auth-name').value.trim();
   const errorEl = $('#auth-error');
-  const successEl = $('#auth-success');
   
-  if (!email || !password) {
-    errorEl.textContent = "Email and password are required.";
-    return;
-  }
-  
-  if (password.length < 6) {
-    errorEl.textContent = "Password must be at least 6 characters.";
+  if (!name) {
+    errorEl.textContent = "Please enter a username.";
     return;
   }
 
   $('#login-btn').textContent = "Loading...";
   errorEl.textContent = "";
-  successEl.textContent = "";
 
-  if (isSignUp) {
-    const { data, error } = await supabase.auth.signUp({ email, password });
-    if (error) {
-      errorEl.textContent = error.message;
-      $('#login-btn').textContent = "Sign Up";
-    } else {
-      successEl.textContent = "Account created! You can now sign in.";
-      setTimeout(() => {
-        isSignUp = false;
-        $('#auth-toggle').click();
-      }, 2000);
+  const email = `${name.toLowerCase().replace(/\s+/g, '')}@numeria.local`;
+  const password = "numeria-secret-password-123";
+
+  try {
+    // Try to sign in first
+    let { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    
+    // If login fails (user doesn't exist), sign them up
+    if (error && error.message.includes("Invalid login credentials")) {
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({ email, password });
+      if (signUpError) throw signUpError;
+      data = signUpData;
+    } else if (error) {
+      throw error;
     }
-  } else {
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      errorEl.textContent = error.message;
-      $('#login-btn').textContent = "Continue";
-    } else {
-      currentUser = data.user;
-      loadProfile();
+
+    currentUser = data.user;
+    state.name = name;
+    
+    // Check if profile exists, if not, create it
+    const { data: profile, error: profileError } = await supabase.from('profiles').select('*').eq('id', currentUser.id).single();
+    
+    if (profileError && profileError.code === 'PGRST116') {
+      await supabase.from('profiles').insert([{ id: currentUser.id, username: name, xp: 0, coins: 0, hint_tokens: 0 }]);
+    } else if (profile) {
+      state = { ...state, name: profile.username, xp: profile.xp, coins: profile.coins, hintTokens: profile.hint_tokens };
     }
+
+    $('#login-screen').classList.add('hidden');
+    $('#app').classList.add('active');
+    updateUI();
+
+  } catch (err) {
+    errorEl.textContent = err.message || "Failed to connect to database.";
+    $('#login-btn').textContent = "Continue";
   }
 });
 
@@ -445,20 +392,6 @@ $('#logout-btn').addEventListener('click', async () => {
   await supabase.auth.signOut();
   location.reload();
 });
-
-async function loadProfile() {
-  const { data, error } = await supabase.from('profiles').select('*').eq('id', currentUser.id).single();
-  
-  if (data) {
-    state = { ...state, name: data.username || 'Explorer', xp: data.xp || 0, coins: data.coins || 0, hintTokens: data.hint_tokens || 0 };
-  } else if (error && error.code === 'PGRST116') {
-    await supabase.from('profiles').insert([{ id: currentUser.id, username: 'Explorer', xp: 0, coins: 0, hint_tokens: 0 }]);
-  }
-  
-  $('#login-screen').classList.add('hidden');
-  $('#app').classList.add('active');
-  updateUI();
-}
 
 async function saveProfile() {
   if (!currentUser) return;
@@ -469,13 +402,6 @@ async function saveProfile() {
     hint_tokens: state.hintTokens
   }).eq('id', currentUser.id);
 }
-
-supabase.auth.getSession().then(({ data: { session } }) => {
-  if (session) {
-    currentUser = session.user;
-    loadProfile();
-  }
-});
 
 // UI LOGIC
 function updateUI() {
